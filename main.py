@@ -43,3 +43,5 @@ if submit:
         st.error("High Risk of AKI")
     else:
         st.success("Low Risk")
+        st.markdown("---")
+st.caption("⚠️ **Disclaimer:** This tool is for research purposes only and does not constitute medical advice. The predictions are based on historical data from the MIMIC-IV database and should not be used for clinical decision-making.")
