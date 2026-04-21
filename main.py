@@ -56,42 +56,31 @@ with st.form("full_patient_form"):
     submit = st.form_submit_button("Calculate Full Risk Score")
 
 if submit:
-    # Конвертируем пол в число (как было при обучении, обычно M=1, F=0 или наоборот)
-    # Проверь, как ты делал в Colab. Предположим M=1, F=0:
+    # 1. Кодируем пол (убедись, как было в Colab, обычно M=1)
     gender_val = 1 if gender == "M" else 0
     
-    # СТРОГИЙ ПОРЯДОК согласно твоему imputer.pkl:
-    # gender, age, baseline, bun, lactate, hemoglobin, hematocrit, glucose, 
-    # potassium, sodium, bicarbonate, platelets, wbc, ph, chloride, pO2, pCO2, 
-    # heart_rate, mean_map, resp_rate, temp_c
+    # 2. Формируем список СТРОГО по порядку из твоего imputer.pkl
+    # Порядок: gender, age, baseline, bun, lactate, hemoglobin, hematocrit, 
+    # glucose, potassium, sodium, bicarbonate, platelets, wbc, ph, chloride, 
+    # pO2, pCO2, heart_rate, mean_map, resp_rate, temp_c
     
-    raw_data = [
+    correct_order_data = [
         gender_val, age, baseline, bun, lactate, 
         hemog, hemato, glu, potas, sodium, 
         bicarb, plat, wbc, ph, chlor, 
         po2, pco2, hr, map_val, resp, temp
     ]
     
-    input_array = np.array([raw_data])
+    input_array = np.array([correct_order_data])
     
-    try:
-        # 1. Заполняем пропуски (если есть)
-        imputed = imputer.transform(input_array)
-        # 2. Масштабируем (теперь числа станут понятны модели)
-        processed = scaler.transform(imputed)
-        # 3. Предсказываем
-        prob = model.predict_proba(processed)[0][1]
-        
-        st.divider()
-        st.subheader(f"Risk Probability: {prob*100:.1f}%")
-        
-        if prob > 0.4:
-            st.error("🚨 HIGH RISK: Intensive monitoring recommended.")
-        else:
-            st.success("✅ LOW RISK: Within expected range.")
-            
-    except Exception as e:
-        st.error(f"Error during prediction: {e}")
+    # Теперь трансформации пройдут по нужным колонкам
+    imputed = imputer.transform(input_array)
+    processed = scaler.transform(imputed)
+    
+    prob = model.predict_proba(processed)[0][1]
+    
+    st.divider()
+    st.subheader(f"Risk Probability: {prob*100:.1f}%")
 
 st.markdown("---")
 st.caption("⚠️ **Disclaimer:** For research purposes only. Not medical advice.")
