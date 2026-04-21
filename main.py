@@ -12,7 +12,8 @@ model.load_model('model.json')
 imputer = joblib.load('imputer.pkl')
 scaler = joblib.load('scaler.pkl')
 
-feature_columns = ['age', 'gender', 'baseline_val', 'heart_rate', 'resprate', 'mean_map', 'temp_c', 'spo2', 'glucose', 'lactate', 'ph', 'pco2', 'po2', 'bicarbonate', 'chloride', 'potassium', 'sodium', 'hematocrit', 'hemoglobin', 'platelets', 'wbc', 'bun']
+feature_columns = ['age', 'gender', 'baseline_val', 'heart_rate', 'resp_rate', 'mean_map', 'temp_c', 'spo2', 'glucose', 'lactate', 'ph', 'pCO2', 'pO2', 'bicarbonate', 'chloride', 'potassium', 'sodium', 'hematocrit', 'hemoglobin', 'platelets', 'wbc', 'bun']
+
 
 with st.form("patient_form"):
     # ТУТ НУЖНО ДОБАВИТЬ ОТСТУПЫ (4 ПРОБЕЛА) ПЕРЕД СТРОКАМИ НИЖЕ:
