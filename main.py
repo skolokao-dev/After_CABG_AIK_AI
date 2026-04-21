@@ -56,15 +56,15 @@ with st.form("full_patient_form"):
     submit = st.form_submit_button("Calculate Full Risk Score")
 
 if submit:
-    # Передаем данные списком, чтобы избежать проблем с именами колонок
-    raw_data = [age, 1 if gender == "M" else 0, baseline, hr, resp, map_val, temp, spo2, glu, lactate, ph, pco2, po2, bicarb, chlor, potas, sodium, hemato, hemog, plat, wbc, bun]
+    # Убираем gender (второй по счету), чтобы осталось 21 значение
+    raw_data = [age, baseline, hr, resp, map_val, temp, spo2, glu, lactate, ph, pco2, po2, bicarb, chlor, potas, sodium, hemato, hemog, plat, wbc, bun]
+    
     input_array = np.array([raw_data])
     
-    # Сначала заполняем пропуски (если есть), потом масштабируем
+    # Теперь imputer получит 21 значение и не будет ругаться
     imputed = imputer.transform(input_array)
     processed = scaler.transform(imputed)
     
-    # Предсказание
     prob = model.predict_proba(processed)[0][1]
     
     st.divider()
@@ -72,7 +72,7 @@ if submit:
     if prob > 0.4:
         st.error("HIGH RISK: Intensive monitoring recommended.")
     else:
-        st.success("LOW RISK: Within expected postoperative range.")
+        st.success("LOW RISK: Within expected range.")
 
 st.markdown("---")
 st.caption("⚠️ **Disclaimer:** For research purposes only. Not medical advice.")
