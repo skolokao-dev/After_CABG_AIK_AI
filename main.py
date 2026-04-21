@@ -5,7 +5,7 @@ import xgboost as xgb
 import joblib
 
 st.set_page_config(page_title="Full AKI Predictor", layout="wide")
-st.title("🏥 Clinical Post-CABG AKI Predictor (Full Version)")
+st.title("🏥 Clinical Post-CABG AKI Predictor")
 
 model = xgb.XGBClassifier()
 model.load_model('model.json')
@@ -56,10 +56,15 @@ with st.form("full_patient_form"):
     submit = st.form_submit_button("Calculate Full Risk Score")
 
 if submit:
-    # Порядок должен В ТОЧНОСТИ совпадать с твоим обучением
+    # Передаем данные списком, чтобы избежать проблем с именами колонок
     raw_data = [age, 1 if gender == "M" else 0, baseline, hr, resp, map_val, temp, spo2, glu, lactate, ph, pco2, po2, bicarb, chlor, potas, sodium, hemato, hemog, plat, wbc, bun]
     input_array = np.array([raw_data])
-    processed = scaler.transform(input_array)
+    
+    # Сначала заполняем пропуски (если есть), потом масштабируем
+    imputed = imputer.transform(input_array)
+    processed = scaler.transform(imputed)
+    
+    # Предсказание
     prob = model.predict_proba(processed)[0][1]
     
     st.divider()
@@ -70,15 +75,4 @@ if submit:
         st.success("LOW RISK: Within expected postoperative range.")
 
 st.markdown("---")
-st.caption("⚠️ **Disclaimer:** For research purposes only. Not a clinical diagnostic tool.")
-    input_df.at[0, 'lactate'] = lactate
-    processed = scaler.transform(imputer.transform(input_df))
-    prob = model.predict_proba(processed)[0][1]
-    st.divider()
-    st.subheader(f"Risk: {prob*100:.1f}%")
-    if prob > 0.4:
-        st.error("High Risk of AKI")
-    else:
-        st.success("Low Risk")
-        st.markdown("---")
-st.caption("⚠️ **Disclaimer:** This tool is for research purposes only and does not constitute medical advice. The predictions are based on historical data from the MIMIC-IV database and should not be used for clinical decision-making.")
+st.caption("⚠️ **Disclaimer:** For research purposes only. Not medical advice.")
