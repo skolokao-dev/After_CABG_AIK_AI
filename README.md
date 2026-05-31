@@ -5,7 +5,6 @@ This project focuses on predicting **Acute Kidney Injury (AKI)** in patients fol
 
 ## Performance Metrics
 - **ROC-AUC Score:** 0.755
-- **PR-AUC Score:** [Вставь свою цифру из Colab]
 - **Recall (Sensitivity):** 0.46
 
 ## Methodology
