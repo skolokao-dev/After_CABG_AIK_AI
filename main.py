@@ -73,10 +73,24 @@ if submit:
     input_array = np.array([correct_order_data])
     
     # Теперь трансформации пройдут по нужным колонкам
-    imputed = imputer.transform(input_array)
-    processed = scaler.transform(imputed)
+        # 1. Берем первые 21 признак для импьютера (так как он обучен на 21)
+    data_for_imputer = [
+        gender_val, age, baseline, bun, lactate,
+        henog, henato, glu, potas, sodium,
+        bicarb, plat, wbc, ph, chlor,
+        po2, pco2, hr, map_val, resp, temp_c
+    ]
     
+    # 2. Пропускаем через импьютер
+    imputed_21 = imputer.transform([data_for_imputer])
+    
+    # 3. Добавляем 22-й признак (source_eicu = 0) обратно в массив
+    final_data = np.append(imputed_21, [[0]], axis=1)
+    
+    # 4. Скалер и модель (они ждут 22 признака)
+    processed = scaler.transform(final_data)
     prob = model.predict_proba(processed)[0][1]
+
     
     st.divider()
     st.subheader(f"Risk Probability: {prob*100:.1f}%")
