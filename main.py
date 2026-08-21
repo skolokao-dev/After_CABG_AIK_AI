@@ -24,7 +24,6 @@ with st.form("full_patient_form"):
         temp = st.number_input("Temp (°C)", 34.0, 42.0, 36.6)
         resp = st.number_input("Resp Rate", 10, 50, 18)
     with c3:
-        spo2 = st.number_input("SPO2 (%)", 50, 100, 98)
         baseline = st.number_input("Baseline Creatinine", 0.1, 10.0, 1.0)
 
     st.subheader("2. Blood Gases & Chemistry")
@@ -65,7 +64,7 @@ if submit:
     # pO2, pCO2, heart_rate, mean_map, resp_rate, temp_c
     
         correct_order_data = [
-        gender_val, age, spo2, baseline, bun, lactate,
+        gender_val, age, baseline, bun, lactate,
         henog, henato, glu, potas, sodium,
         bicarb, plat, wbc, ph, chlor,
         po2, pco2, hr, map_val, resp, temp
