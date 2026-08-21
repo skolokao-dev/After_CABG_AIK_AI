@@ -68,7 +68,7 @@ if submit:
         hemog, hemato, glu, potas, sodium, 
         bicarb, plat, wbc, ph, chlor, 
         po2, pco2, hr, map_val, resp, temp
-]
+    ]
     
     input_array = np.array([correct_order_data])
     
