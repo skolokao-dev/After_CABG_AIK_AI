@@ -67,7 +67,7 @@ if submit:
         gender_val, age, baseline, bun, lactate, 
         hemog, hemato, glu, potas, sodium, 
         bicarb, plat, wbc, ph, chlor, 
-        po2, pco2, hr, map_val, resp, temp
+        po2, pco2, hr, map_val, resp, temp, 0
     ]
     
     input_array = np.array([correct_order_data])
