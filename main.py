@@ -76,7 +76,7 @@ if submit:
         # 1. Берем первые 21 признак для импьютера (так как он обучен на 21)
     data_for_imputer = [
         gender_val, age, baseline, bun, lactate,
-        hemog, henato, glu, potas, sodium,
+        hemog, hemato, glu, potas, sodium,
         bicarb, plat, wbc, ph, chlor,
         po2, pco2, hr, map_val, resp, temp_c
     ]
