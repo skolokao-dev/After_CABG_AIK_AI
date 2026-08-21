@@ -64,10 +64,10 @@ if submit:
     # glucose, potassium, sodium, bicarbonate, platelets, wbc, ph, chloride, 
     # pO2, pCO2, heart_rate, mean_map, resp_rate, temp_c
     
-    correct_order_data = [
-        gender_val, age, baseline, bun, lactate, 
-        hemog, hemato, glu, potas, sodium, 
-        bicarb, plat, wbc, ph, chlor, 
+        correct_order_data = [
+        gender_val, age, spo2, baseline, bun, lactate,
+        henog, henato, glu, potas, sodium,
+        bicarb, plat, wbc, ph, chlor,
         po2, pco2, hr, map_val, resp, temp
     ]
     
