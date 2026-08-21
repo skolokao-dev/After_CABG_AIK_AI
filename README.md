@@ -1,11 +1,11 @@
-# AKI Prediction Model after CABG Surgery (MIMIC-IV)
+# AKI Prediction Model after CABG Surgery (MIMIC-IV, eICU, INSPIRE)
 
 ## Project Overview
-This project focuses on predicting **Acute Kidney Injury (AKI)** in patients following Coronary Artery Bypass Grafting (CABG). Utilizing the **MIMIC-IV** dataset, I developed a machine learning pipeline to identify high-risk patients early.
+This project focuses on predicting **Acute Kidney Injury (AKI)** in patients following Coronary Artery Bypass Grafting (CABG). Utilizing the MIMIC-IV, eICU, INSPIRE datasets, I developed a machine learning pipeline to identify high-risk patients early.
 
 ## Performance Metrics
-- **ROC-AUC Score:** 0.755
-- **Recall (Sensitivity):** 0.46
+- **ROC-AUC Score:** 0.7902
+- **Recall (Sensitivity):** 0.6765
 
 ## Methodology
 - **Algorithm:** XGBoost (Extreme Gradient Boosting) with `scale_pos_weight` for class imbalance.
