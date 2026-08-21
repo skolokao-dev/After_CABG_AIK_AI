@@ -62,13 +62,13 @@ if submit:
     # Порядок: gender, age, baseline, bun, lactate, hemoglobin, hematocrit, 
     # glucose, potassium, sodium, bicarbonate, platelets, wbc, ph, chloride, 
     # pO2, pCO2, heart_rate, mean_map, resp_rate, temp_c
-    
-        correct_order_data = [
+
+correct_order_data = [
         gender_val, age, baseline, bun, lactate,
         henog, henato, glu, potas, sodium,
         bicarb, plat, wbc, ph, chlor,
         po2, pco2, hr, map_val, resp, temp
-    ]
+]
     
     input_array = np.array([correct_order_data])
     
