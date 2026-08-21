@@ -76,8 +76,8 @@ if submit:
        # 1. Берем первые 21 признак (используя правильные полные названия переменных с формы)
     data_for_imputer = [
         gender_val, age, baseline, bun, lactate,
-        hemoglobin, hematocrit, glucose, potassium, sodium,
-        bicarbonate, plat, wbc, ph, chloride,
+        hemog, hemato, glu, potas, sodium,
+        bicarb, plat, wbc, ph, chlor,
         po2, pco2, hr, map_val, resp, temp
     ]
     
