@@ -78,7 +78,7 @@ if submit:
         gender_val, age, baseline, bun, lactate,
         hemog, hemato, glu, potas, sodium,
         bicarb, plat, wbc, ph, chlor,
-        po2, pco2, hr, map_val, resp, temp_c
+        po2, pco2, hr, map_val, resp, temp
     ]
     
     # 2. Пропускаем через импьютер
