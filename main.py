@@ -73,23 +73,25 @@ if submit:
     input_array = np.array([correct_order_data])
     
     # Теперь трансформации пройдут по нужным колонкам
-        # 1. Берем первые 21 признак для импьютера (так как он обучен на 21)
+       # 1. Берем первые 21 признак (используя правильные полные названия переменных с формы)
     data_for_imputer = [
         gender_val, age, baseline, bun, lactate,
-        hemog, hemato, glu, potas, sodium,
-        bicarb, plat, wbc, ph, chlor,
+        hemoglobin, hematocrit, glucose, potassium, sodium,
+        bicarbonate, plat, wbc, ph, chloride,
         po2, pco2, hr, map_val, resp, temp
     ]
     
-    # 2. Пропускаем через импьютер
+    # 2. Прогоняем 21 признак через импьютер
     imputed_21 = imputer.transform([data_for_imputer])
     
-    # 3. Добавляем 22-й признак (source_eicu = 0) обратно в массив
-    final_data = np.append(imputed_21, [[0]], axis=1)
+    # 3. Прогоняем эти же 21 признак через скалер (он ждет ровно 21)
+    scaled_21 = scaler.transform(imputed_21)
     
-    # 4. Скалер и модель (они ждут 22 признака)
-    processed = scaler.transform(final_data)
-    prob = model.predict_proba(processed)[0][1]
+    # 4. Добавляем 22-й признак (source_eicu = 0) в самый конец
+    final_data = np.append(scaled_21, [[0]], axis=1)
+    
+    # 5. Модель получает все 22 признака и делает предсказание
+    prob = model.predict_proba(final_data)[0][1]
 
     
     st.divider()
